@@ -1,0 +1,3 @@
+/home/yoma/yoma/orb_test/build/CMakeFiles/rebuild_cache.dir
+/home/yoma/yoma/orb_test/build/CMakeFiles/edit_cache.dir
+/home/yoma/yoma/orb_test/build/CMakeFiles/orb_match.dir
