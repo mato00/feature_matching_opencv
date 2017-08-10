@@ -50,19 +50,19 @@ int main(int argc, char *argv[]) {
     Ptr<SURF> extractor = SURF::create();
 
     //-- object
-    if(0 == strcmp(argv[2], "0")) { //-- ORB
+    if(0 == strcmp(argv[2], "orb")) { //-- ORB
         // orb.detect(img_object, keypoints_object);
         // //drawKeypoints(img_object, keypoints_object, img_object, Scalar(0,255,255));
         // //imshow("template", img_object);
         //
         // orb.compute(img_object, keypoints_object, descriptors_object);
         orb->detectAndCompute(img_object, Mat(), keypoints_object, descriptors_object);
-    } else if(0 == strcmp(argv[2], "1")){ //-- SURF test
+    } else if(0 == strcmp(argv[2], "surf")){ //-- SURF test
         // detector.detect(img_object, keypoints_object);
         // extractor.compute(img_object, keypoints_object, descriptors_object);
         detector->detect(img_object, keypoints_object);
         extractor->compute(img_object, keypoints_object, descriptors_object);
-    }else if(0 == strcmp(argv[2], "2")){
+    }else if(0 == strcmp(argv[2], "gms")){
         orb->setFastThreshold(0);
         orb->detectAndCompute(img_object, Mat(), keypoints_object, descriptors_object);
     }
@@ -89,17 +89,17 @@ int main(int argc, char *argv[]) {
         vector<DMatch> matches;
         vector<DMatch> good_matches;
 
-        if(0 == strcmp(argv[2], "0")) { //-- ORB
+        if(0 == strcmp(argv[2], "orb")) { //-- ORB
             orb->detectAndCompute(img_scene, Mat(), keypoints_scene, descriptors_scene);
             // orb->compute(img_scene, keypoints_scene, descriptors_scene);
             //-- matching descriptor vectors using FLANN matcher
             FlannMatch(img_object, img_scene, keypoints_object, keypoints_scene, descriptors_object, descriptors_scene, img_matches, matches, good_matches);
 
-        }else if(0 == strcmp(argv[2], "1")){ //-- SURF
+        }else if(0 == strcmp(argv[2], "surf")){ //-- SURF
             detector->detect(img_scene, keypoints_scene);
             extractor->compute(img_scene, keypoints_scene, descriptors_scene);
             FlannMatch(img_object, img_scene, keypoints_object, keypoints_scene, descriptors_object, descriptors_scene, img_matches, matches, good_matches);
-        }else if(0 == strcmp(argv[2], "2")){
+        }else if(0 == strcmp(argv[2], "gms")){
             orb->setFastThreshold(0);
             orb->detectAndCompute(img_scene, Mat(), keypoints_scene, descriptors_scene);
             GmsMatch(img_object, img_scene, keypoints_object, keypoints_scene, descriptors_object, descriptors_scene, img_matches, matches, good_matches);
